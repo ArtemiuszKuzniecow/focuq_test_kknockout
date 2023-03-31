@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css">
+
+    <title>Документы</title>
+</head>
+
+<body>
+    <div id="docs">
+        <!-- HEADLINE && BUTTONS -->
+        <div class="flex justify-between items-center mb-5">
+            <div>
+                <h1 class="text-2xl font-bold">Документы</h1>
+            </div>
+            <div class="flex gap-3">
+                <button class="buttons_border flex items-center flex-row p-3 ">
+                    <img src="./assets/bookmark.svg" alt="">
+                </button>
+                <button class="buttons_border flex flex-row items-center p-3 gap-2">
+                    <img src="./assets/plus.svg" alt="">
+                    Новый тип
+                </button>
+                <button class="buttons_border flex flex-row items-center p-3 gap-2">
+                    <img src="./assets/plus.svg" alt="">
+                    Новый документ
+                </button>
+            </div>
+        </div>
+
+        <div class="flex gap-3 mb-10">
+            <img src="./assets/search.svg" alt="">
+            <input type="text" placeholder="Поиск" name="search" class="search"
+                data-bind="hasFocus: isSearchFieldFocused"><img src="./assets/close.svg" alt=""
+                data-bind="visible: isSearchFieldFocused" class="cursor-pointer">
+            <div></div>
+        </div>
+
+        <!-- TYPES -->
+        <!-- ALL DOCUMENTS HEADER -->
+        <div id="types">
+            <div>
+                <div class="flex items-center justify-between border-2 p-5">
+                    <div class="flex items-center gap-5"
+                        data-bind="dropZone: { accepts: 'docs', drop: dropToRequiredForAll }">
+                        <div data-bind="click: toggleRequiredForAllCollapsed">
+                            <img data-bind="visible: isRequiredForAllCollapsed" src="./assets/arrow_down.svg"
+                                alt="arrow" class="p-1 buttons_border cursor-pointer">
+                            <img data-bind="visible: !isRequiredForAllCollapsed()" src="./assets/arrow_up.svg"
+                                alt="arrow" class="p-1 buttons_border cursor-pointer">
+                        </div>
+                        <h3 class="text-lg font-bold">Обязательные для всех</h3>
+                        <div class="flex gap-2
+                        ">
+                            <div class="elips_pink"></div>
+                            <div class="elips_orange_light"></div>
+                            <div class="elips_orange_dark"></div>
+                        </div>
+                        <p class="gray_color_text text-sm">Документы, обязательные для всех сотрудников без исключения
+                        </p>
+                    </div>
+                    <div class="flex gap-2">
+                        <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                        <img src="./assets/delete_active.svg" alt="" data-bind="visible: isRequiredForAllCollapsed"
+                            class="cursor-pointer">
+                        <img src="./assets/deletetrash_not_active.svg" alt=""
+                            data-bind="visible: !isRequiredForAllCollapsed()" class="cursor-pointer">
+                        <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                    </div>
+                </div>
+            </div>
+            <!-- ALL DOCUMENTS LIST -->
+            <div data-bind="visible: !isRequiredForAllCollapsed()" class="pl-7">
+                <div data-bind="foreach: requiredForAll">
+                    <div class="flex items-center justify-between border-2 p-5 item"
+                        data-bind="dragZone: {name:'docs'}">
+                        <div class="flex items-center gap-5">
+                            <h3 class="text-md font-medium" data-bind="text: title"></h3>
+                            <div data-bind="visible: title === 'Паспорт'">
+                                <div class="elips_sky"></div>
+                            </div>
+                            <p class="gray_color_text text-sm font-medium" data-bind="text: description"></p>
+                            <p class="pink_color_text text-sm font-medium">Обязательный</p>
+                            <p class="gray_color_text text-sm font-medium">Для всех</p>
+                        </div>
+                        <div class=" flex gap-2">
+                            <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                            <img src="./assets/delete_active.svg" alt="" class="cursor-pointer">
+                            <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- REQUIRED FOR EMPLOYMENT HEADER -->
+            <div class="flex items-center justify-between border-2 p-5">
+                <div class="flex items-center gap-5"
+                    data-bind="dropZone: { accepts: 'docs', drop: dropToRequiredForEmployment }">
+                    <div data-bind="click: toggleRequiredForEmploymentCollapsed">
+                        <img data-bind="visible: isRequiredForEmploymentCollapsed" src="./assets/arrow_down.svg"
+                            alt="arrow" class="p-1 buttons_border cursor-pointer">
+                        <img data-bind="visible: !isRequiredForEmploymentCollapsed()" src="./assets/arrow_up.svg"
+                            alt="arrow" class="p-1 buttons_border cursor-pointer">
+                    </div>
+                    <h3 class="text-lg font-bold">Обязательные для трудоустройства</h3>
+                    <p class="gray_color_text text-sm">Документы, без которых невозможно трудоустройство человека на
+                        какую
+                        бы то ни
+                        было должность в
+                        компании
+                        вне зависимости от граж</p>
+                </div>
+                <div class="flex gap-2">
+                    <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                    <img src="./assets/delete_active.svg" alt="" data-bind="visible: isRequiredForEmploymentCollapsed"
+                        class="cursor-pointer">
+                    <img src="./assets/deletetrash_not_active.svg" alt=""
+                        data-bind="visible: !isRequiredForEmploymentCollapsed()" class="cursor-pointer">
+                    <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                </div>
+            </div>
+            <!-- REQUIRED FOF EMPLOYMENT LIST -->
+            <div data-bind="visible: !isRequiredForEmploymentCollapsed()" class="pl-7">
+                <div data-bind="foreach: requiredForEmployment">
+                    <div class="flex items-center justify-between border-2 p-5 item" data-bind="dragZone: {name:'docs'}"
+                        data-bind="dragZone: {name:'docs'}">
+                        <div class="flex items-center gap-5">
+                            <h3 class="text-md font-medium" data-bind="text: title"></h3>
+                            <div class="flex gap-2" data-bind="visible: title === 'Трудовой договор'">
+                                <div class="elips_blue_dark"></div>
+                                <div class="elips_blue_transparent"></div>
+                            </div>
+                            <p class="gray_color_text text-sm font-medium" data-bind="text: description"></p>
+                        </div>
+
+                        <div class=" flex gap-2">
+                            <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                            <img src="./assets/delete_active.svg" alt="" class="cursor-pointer">
+                            <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SPECIAL HEADER -->
+            <div class="flex items-center justify-between border-2 p-5"
+                data-bind="dropZone: { accepts: 'docs', drop: dropToSpecial }">
+                <div class="flex items-center gap-5">
+                    <div class="cursor-pointer" data-bind="click: toggleOutOfCategoriesCollapsed">
+                        <img data-bind="visible: isOutOfCategoriesCollapsed" src="./assets/arrow_down.svg" alt="arrow"
+                            class="p-1 buttons_border">
+                        <img data-bind="visible: !isOutOfCategoriesCollapsed()" src="./assets/arrow_up.svg" alt="arrow"
+                            class="p-1 buttons_border">
+                    </div>
+                    <h3 class="text-lg font-bold">Специальные</h3>
+                </div>
+                <div class="flex gap-2">
+                    <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                    <img src="./assets/delete_active.svg" alt="" data-bind="visible: isOutOfCategoriesCollapsed"
+                        class="cursor-pointer">
+                    <img src="./assets/deletetrash_not_active.svg" alt=""
+                        data-bind="visible: !isOutOfCategoriesCollapsed()" class="cursor-pointer">
+                    <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                </div>
+            </div>
+        </div>
+        <!-- SPECIAL LIST -->
+        <div data-bind="visible: !isOutOfCategoriesCollapsed()" class="pl-7">
+            <div data-bind="foreach: special">
+                <div class="flex items-center justify-between border-2 p-5 item" data-bind="dragZone: {name:'docs'}">
+                    <div class="flex items-center gap-5">
+                        <h3 class="text-md font-medium" data-bind="text: title"></h3>
+                        <div class="flex gap-2" data-bind="visible: title === 'Трудовой договор'">
+                            <div class="elips_blue_dark"></div>
+                            <div class="elips_blue_transparent"></div>
+                        </div>
+                        <p class="gray_color_text text-sm font-medium" data-bind="text: description"></p>
+                    </div>
+
+                    <div class=" flex gap-2">
+                        <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                        <img src="./assets/delete_active.svg" alt="" class="cursor-pointer">
+                        <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- DOCS -->
+
+        <div data-bind="visible: outOfCategories().length">
+            <div class="mt-2"
+                data-bind="foreach: outOfCategories, dropZone: { accepts: 'docs', drop: dropToOutOfCategories }">
+                <div class="flex items-center justify-between border-2 p-3 item" data-bind="dragZone: {name:'docs'}">
+                    <div class="flex items-center gap-5">
+                        <h3 class="text-md font-medium" data-bind="text: title"></h3>
+                        <div class="flex gap-2" data-bind="visible: title === 'Трудовой договор'">
+                            <div class="elips_blue_dark"></div>
+                            <div class="elips_blue_transparent"></div>
+                        </div>
+
+                        <p class="gray_color_text text-sm" data-bind="text: description"></p>
+
+                    </div>
+                    <div class="flex gap-2">
+                        <img src="./assets/pencil.svg" alt="" class="cursor-pointer">
+                        <img src="./assets/delete_active.svg" alt="" class="cursor-pointer">
+                        <img src="./assets/move.svg" alt="" class="cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-2 mt-5 p-10"
+            data-bind="dropZone: { accepts: 'docs', drop: dropToOutOfCategories }, visible: !outOfCategories().length">
+        </div>
+
+    </div>
+
+    <script src="./bower_components/knockout/dist/knockout.js"></script>
+    <script src="./bower_components/knockout-dragdrop/lib/knockout.dragdrop.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
